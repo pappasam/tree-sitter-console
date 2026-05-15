@@ -1,0 +1,203 @@
+==================
+Commands and output
+==================
+
+$ echo hello
+hello
+$ printf '%s\n' done
+done
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text))
+  (output (output_text))
+  (command
+    prompt: (prompt)
+    body: (command_text))
+  (output (output_text)))
+
+==================
+Backslash continuation
+==================
+
+$ echo \
+  hello
+hello
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text)))
+  (output (output_text)))
+
+==================
+Open delimiters and compounds
+==================
+
+$ (
+  echo subshell
+)
+$ if true; then
+  echo branch
+fi
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text)))
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text))))
+
+==================
+Quotes and substitutions
+==================
+
+$ echo "$(
+  date
+)"
+$ echo '
+literal
+'
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text)))
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text))))
+
+==================
+Heredoc continuation
+==================
+
+$ cat <<EOF
+hello
+EOF
+hello
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text)))
+  (output (output_text)))
+
+==================
+Prompt-like continuation is not a new command
+==================
+
+$ echo "$(
+$ date
+)"
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text))))
+
+==================
+Control operators and test commands
+==================
+
+$ echo one |
+  sed s/one/two/
+$ true &&
+  echo yes
+$ [[ -n "$HOME" &&
+  -d "$HOME" ]]
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text)))
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text)))
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))))
+
+==================
+Loops and brace groups
+==================
+
+$ for name in a b; do
+  echo "$name"
+done
+$ {
+  echo grouped
+}
+
+---
+
+(source_file
+  (blank_line)
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text)))
+  (command
+    prompt: (prompt)
+    body: (command_text)
+    (continuation
+      body: (continuation_text))
+    (continuation
+      body: (continuation_text))))

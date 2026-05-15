@@ -1,0 +1,35 @@
+{
+  "grammars": [
+    {
+      "name": "console",
+      "camelcase": "Console",
+      "scope": "source.console",
+      "path": ".",
+      "file-types": [
+        "console"
+      ],
+      "injection-regex": "^console$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "A tolerant Tree-sitter grammar for console transcripts.",
+    "authors": [
+      {
+        "name": "pappasam"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/pappasam/tree-sitter-console"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "node": false,
+    "rust": false,
+    "python": false,
+    "swift": false,
+    "go": false
+  }
+}

@@ -1,0 +1,17 @@
+$ echo hello
+hello
+$ echo \
+  continued
+continued
+$ (
+  echo subshell
+)
+subshell
+$ if true; then
+  echo branch
+fi
+branch
+$ cat <<EOF
+heredoc body
+EOF
+heredoc body

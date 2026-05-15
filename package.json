@@ -1,0 +1,34 @@
+{
+  "name": "tree-sitter-console",
+  "version": "0.1.0",
+  "description": "A tolerant Tree-sitter grammar for console transcripts.",
+  "keywords": [
+    "tree-sitter",
+    "console",
+    "parser"
+  ],
+  "license": "MIT",
+  "type": "commonjs",
+  "files": [
+    "grammar.js",
+    "queries",
+    "src"
+  ],
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "XDG_CACHE_HOME=${XDG_CACHE_HOME:-/tmp/tree-sitter-xdg-cache} TREE_SITTER_CACHE_DIR=${TREE_SITTER_CACHE_DIR:-/tmp/tree-sitter-cache} tree-sitter test --config-path tree-sitter.config.json",
+    "parse": "tree-sitter parse --config-path tree-sitter.config.json"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.26.8"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.console",
+      "file-types": [
+        "console"
+      ],
+      "injection-regex": "^console$"
+    }
+  ]
+}
