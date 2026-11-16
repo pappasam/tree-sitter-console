@@ -8,9 +8,14 @@
     "parser"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pappasam/tree-sitter-console.git"
+  },
   "type": "commonjs",
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "queries",
     "src"
   ],
@@ -20,7 +25,7 @@
     "parse": "tree-sitter parse --config-path tree-sitter.config.json"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.26.8"
+    "tree-sitter-cli": "0.27.2"
   },
   "tree-sitter": [
     {
